@@ -1,0 +1,30 @@
+a:hover{
+    color: red;
+}
+
+article {
+    padding: 2px;
+    border: 1px solid red;
+    border-radius: 10px;
+}
+
+article > p{
+    padding: 10px;
+    font-size: 1.5rem;
+    color: skyblue;
+}
+article > h1{
+    padding: 4px;
+    font-family: Impact;
+    color: #000000;
+}
+canvas{
+    padding: 6px;
+    align-content: center;
+    border: 2px solid green;
+}
+
+mark {
+    background-color: green;
+    color: black;
+  }
