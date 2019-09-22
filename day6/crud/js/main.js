@@ -68,7 +68,7 @@ function passVal(){
     }
     
 }
-
+// data insertion
     $(document).ready(function () {
         var form = $('#form1');
         $('$submit').click(function () {
@@ -79,3 +79,36 @@ function passVal(){
             });
         });
     });
+
+// data view
+var htmls = "";
+var i = 0;
+$(document).ready(function () {
+    $.ajax({
+        url: 'index.php',
+        method: 'GET',
+        success: function (data) {
+            // var result = $.parseJSON(data);
+
+            //console.log(data);
+            $("#tbody").html = "";
+            $.each(JSON.parse(data), function (key, data) {
+                i++;
+                htmls += "<tr id='tr_" + data['id'] + "'><th>" + i + "</th><td>" + data['username'] + "</td><td>" + data['email'] + "</td>" +
+                    "<td>" + data['city'] + "</td><td><div class='dropdown'>" +
+                    "<button class='btn btn-primary dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown'>Action </button>" +
+                    "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>" +
+                    "<button class='dropdown-item text-danger' onclick='deleted(" + data['id'] + ")'>Delete</button>" +
+                    "<button class='dropdown-item' onclick='edit(" + data['id'] + ")'>Edit</button>" +
+                    "<button class='dropdown-item text-info' onclick='detials(" + data['id'] + ")'>Details</button></div></div></td></tr>";
+            })
+
+            $("#tbody").html(htmls);
+            //for data table
+            $('#myTable').DataTable();
+        },
+        error: function () {
+            $.notify("There are some problemes", "error");
+        }
+    });
+})

@@ -1,9 +1,11 @@
 <?php
-$db = mysqli_connect('localhost', 'root', '', 'test', '3307');
+include "../db/conn.php";
+
 extract($_POST);
 if(isset($_POST['submit'])){
-    $q = "INSERT INTO newdata (`name`, `email`) Values ('$fname', '$email')" ;
-    mysqli_query($db, $q);
+    $q = "INSERT INTO customers (`fname`, `lname`, `email`, `password`, `gender`, `dob`, `education`, `address`, `bio`
+) Values ('$fname', '$lname', '$email', '$password', '$gender', '$dob', '$education', '$address', '$bio')" ;
+    mysqli_query($conn, $q);
     header("Location: ../index.php");
 }
 
