@@ -28,7 +28,7 @@ include "includes/view_data.php";
                     <td>".$row['address']."</td>
                     <td>".$row['education']."</td>
                     <td>".$row['bio']."</td>
-                    <td></td>
+                    <td><a href='edit.php?id=".$row['id']. "' id='edit'><i class='fa fa-edit'></i> </a> || <a class='delete' d-id='" . $row['id'] . "' href='#'><i class='fa fa-trash'></i></a> </td>
                 </tr>
                 ";
             }

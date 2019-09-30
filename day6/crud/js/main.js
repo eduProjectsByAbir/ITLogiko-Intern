@@ -71,7 +71,7 @@ function passVal(){
 // data insertion
     $(document).ready(function () {
         var form = $('#form1');
-        $('$submit').click(function () {
+        $('#submit').click(function () {
             $.ajax({
                 url: form.attr('action'),
                 type: 'post',
@@ -80,35 +80,31 @@ function passVal(){
         });
     });
 
-// data view
-var htmls = "";
-var i = 0;
+// data insertion
 $(document).ready(function () {
-    $.ajax({
-        url: 'index.php',
-        method: 'GET',
-        success: function (data) {
-            // var result = $.parseJSON(data);
-
-            //console.log(data);
-            $("#tbody").html = "";
-            $.each(JSON.parse(data), function (key, data) {
-                i++;
-                htmls += "<tr id='tr_" + data['id'] + "'><th>" + i + "</th><td>" + data['username'] + "</td><td>" + data['email'] + "</td>" +
-                    "<td>" + data['city'] + "</td><td><div class='dropdown'>" +
-                    "<button class='btn btn-primary dropdown-toggle' type='button' id='dropdownMenuButton' data-toggle='dropdown'>Action </button>" +
-                    "<div class='dropdown-menu' aria-labelledby='dropdownMenuButton'>" +
-                    "<button class='dropdown-item text-danger' onclick='deleted(" + data['id'] + ")'>Delete</button>" +
-                    "<button class='dropdown-item' onclick='edit(" + data['id'] + ")'>Edit</button>" +
-                    "<button class='dropdown-item text-info' onclick='detials(" + data['id'] + ")'>Details</button></div></div></td></tr>";
-            })
-
-            $("#tbody").html(htmls);
-            //for data table
-            $('#myTable').DataTable();
-        },
-        error: function () {
-            $.notify("There are some problemes", "error");
-        }
+    var form = $('#form2');
+    var data = $("#form2 input").serialize()
+    console.log(data);
+    $('#submit').click(function () {
+        $.ajax({
+            url: form.attr('action'),
+            type: 'post',
+            data: data,
+        });
     });
-})
+});
+
+$('a.delete').on('click', function (e) {
+    var c = confirm();
+    if(c){
+        var id = $(this).attr('d-id');
+        $.ajax({
+            url: "includes/delete_data.php",
+            type: "post",
+            data: {
+                id: id,
+            }
+        });
+        window.location.reload(c);
+    }
+});
